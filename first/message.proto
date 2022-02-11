@@ -1,0 +1,12 @@
+syntax = "proto2";
+package proto;
+
+message Person
+{
+    optional string name = 1;
+    optional int32 id = 2;
+    optional string birthday = 3;
+    optional string email = 4;
+    optional string phone = 5;
+    optional string details = 6;
+}

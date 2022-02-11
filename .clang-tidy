@@ -1,0 +1,88 @@
+---
+Checks: '*,
+  clang-diagnostic-*,
+  clang-analyzer-*,
+  -cert-err58-cpp,
+  google-*,
+  -google-build-using-namespace,
+  -modernize-use-trailing-return-type,
+  cppcoreguidelines-*,
+  -cppcoreguidelines-avoid-non-const-global-variables,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -cppcoreguidelines-pro-bounds-constant-array-index,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -readability-magic-numbers,
+  -altera-*,
+  abseil-*,
+  -fuchsia-*,
+  hicpp-*,
+  -hicpp-no-array-decay,
+  zircon-*,
+  -llvm-*,
+  -llvmlibc-*,
+'
+# Notes on Checks:
+# -cppcoreguidelines-avoid-non-const-global-variables,
+#   Bug: https://bugs.llvm.org/show_bug.cgi?id=48040
+# -cppcoreguidelines-pro-bounds-constant-array-index
+#   No "guideline support library".
+# -cert-err58-cpp,
+#   Await doctest update for TEST_CASE and TEST_CASE_FIXTURE
+# -hicpp-no-array-decay,
+# -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+#   Warns on macro "assert"
+
+WarningsAsErrors: ''
+HeaderFilterRegex: ''
+AnalyzeTemporaryDtors: false
+FormatStyle:     file
+
+CheckOptions:
+  - key:             llvm-else-after-return.WarnOnConditionVariables
+    value:           'false'
+  - key:             modernize-loop-convert.MinConfidence
+    value:           reasonable
+  - key:             modernize-replace-auto-ptr.IncludeStyle
+    value:           llvm
+  - key:             cert-str34-c.DiagnoseSignedUnsignedCharComparisons
+    value:           'false'
+  - key:             cert-oop54-cpp.WarnOnlyIfThisHasSuspiciousField
+    value:           'false'
+  - key:             cppcoreguidelines-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value:           'true'
+  - key:             cert-dcl16-c.NewSuffixes
+    value:           'L;LL;LU;LLU'
+  - key:             google-readability-braces-around-statements.ShortStatementLines
+    value:           '1'
+  - key:             modernize-pass-by-value.IncludeStyle
+    value:           llvm
+  - key:             google-readability-namespace-comments.SpacesBeforeComments
+    value:           '2'
+  - key:             modernize-loop-convert.MaxCopySize
+    value:           '16'
+  - key:             cppcoreguidelines-explicit-virtual-functions.IgnoreDestructors
+    value:           'true'
+  - key:             modernize-use-nullptr.NullMacros
+    value:           'NULL'
+  - key:             llvm-qualified-auto.AddConstToQualified
+    value:           'false'
+  - key:             modernize-loop-convert.NamingStyle
+    value:           CamelCase
+  - key:             llvm-else-after-return.WarnOnUnfixable
+    value:           'false'
+  - key:             google-readability-function-size.StatementThreshold
+    value:           '800'
+  - key:             cppcoreguidelines-special-member-functions.AllowSoleDefaultDtor
+    value:           'true'
+  - key:             cppcoreguidelines-special-member-functions.AllowMissingMoveFunctionsWhenCopyIsDeleted
+    value:           'true'
+  - key:             hicpp-special-member-functions.AllowSoleDefaultDtor
+    value:           'true'
+  - key:             hicpp-special-member-functions.AllowMissingMoveFunctionsWhenCopyIsDeleted
+    value:           'true'
+  - key:             hicpp-signed-bitwise.IgnorePositiveIntegerLiterals
+    value:           'true'
+  - key:             readability-function-cognitive-complexity.IgnoreMacros
+    value:           'true'
+...
+

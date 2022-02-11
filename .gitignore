@@ -1,0 +1,5 @@
+/thirdparty/
+/build/
+.clangd
+.cache
+.vscode/
