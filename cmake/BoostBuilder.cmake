@@ -1,4 +1,5 @@
-cmake_minimum_required(VERSION 3.11)
+cmake_minimum_required(VERSION 3.15)
+cmake_policy(SET CMP0114 NEW)
 
 include(ExternalProject)
 
@@ -19,7 +20,21 @@ if(WIN32)
         install
         )
 elseif(APPLE)
-    message(FATAL "APPLE not supported yet")
+    message(STATUS "macOS build")
+    set(BOOST_BOOTSTRAP_COMMAND /bin/sh ${BOOST_SRC_TOP}/bootstrap.sh --prefix=<INSTALL_DIR>
+        toolset=clang architecture=x86 address-model=64
+        threading=multi variant=debug,release debug-symbols=on
+        link=static,shared runtime-link=shared clang)
+    set(BOOST_B2_COMMAND ${BOOST_SRC_TOP}/b2 -q -d+2 -o commands.log
+        --without-python --without-mpi --wihout-icu --without-graph_parallel
+        --prefix=<INSTALL_DIR>
+        --layout=tagged
+        cxxflags=-std=c++14 toolset=clang
+        architecture=x86 address-model=64 threading=multi
+        variant=debug,release debug-symbols=on
+        link=static,shared runtime-link=shared
+        install
+        )
 else()
     message(STATUS "Unix build")
     set(BOOST_BOOTSTRAP_COMMAND /bin/sh ${BOOST_SRC_TOP}/bootstrap.sh --prefix=<INSTALL_DIR> gcc)

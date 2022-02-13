@@ -9,8 +9,13 @@ if [ ! -f CMakeLists.txt ]; then
 fi
 
 if [ "$1" = "thirdparty" ]; then
-    echo ThirdParty
-    cmake -B thirdparty/build -S . -G "Ninja Multi-Config" -DTHIRDPARTY=TRUE \
+    if [ "$(uname)" = "Darwin" ]; then
+        GEN=Xcode
+    else
+        GEN='Ninja Multi-Config'
+    fi
+    echo "ThirdParty: $GEN"
+    cmake -B thirdparty/build -S . -G "$GEN" -DTHIRDPARTY=TRUE \
         "-DCMAKE_CONFIGURATION_TYPES=Debug;Release" "-DCMAKE_EXPORT_COMPILE_COMMANDS=TRUE"
     cmake --build thirdparty/build --config Debug
     cmake --build thirdparty/build --config Release
