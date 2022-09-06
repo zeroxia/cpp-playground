@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.15)
 set(THIRDPARTY_ROOT ${CMAKE_SOURCE_DIR}/thirdparty)
 message(STATUS "THIRDPARTY_ROOT: ${THIRDPARTY_ROOT}")
 
-if(THIRDPARTY)
+if(ENABLE_THIRDPARTY)
     include(cmake/ThirdParty.cmake)
     return()
 endif()

@@ -13,6 +13,7 @@ include(ExternalProject)
 
 set(CMAKE_INSTALL_PREFIX ${PROJECT_SOURCE_DIR}/thirdparty)
 
+if(temporary_disabled_var)
 ExternalProject_Add(fmt
     PREFIX "${CMAKE_INSTALL_PREFIX}"
     GIT_REPOSITORY "https://github.com/fmtlib/fmt.git"
@@ -55,5 +56,6 @@ ExternalProject_Add(protobuf
     "-Dprotobuf_WITH_ZLIB:BOOL=ON"
     "-DCMAKE_CXX_COMPILER:STRING=${CMAKE_CXX_COMPILER}"
 )
+endif() # temp disable
 
 include(${CMAKE_CURRENT_LIST_DIR}/BoostBuilder.cmake)
